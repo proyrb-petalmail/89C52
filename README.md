@@ -1,4 +1,4 @@
-# Guide of Libraries for 89C52
+# Guide of Libraries for 89C52RC
 
 ## Brief Introduction
 
@@ -25,6 +25,14 @@
 > - **LCD1602**
 >
 >   Implementing LCD display by interacting with LCD1602 through an 8-bit register.
+>   
+> - **LEDMatrix**
+>
+>   Lighting up the LED matrix through continuous scanning.
+>
+> - **Buzzer**
+>
+>   Can emit a fixed frequency of buzzing sound.
 >
 > The remaining modules are in the development stage.
 
@@ -38,8 +46,8 @@
 >
 >    ```c
 >    //...
->    
+>       
 >    #include <xxx.h>
->    
+>       
 >    //...
 >    ```

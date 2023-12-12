@@ -2,23 +2,19 @@
 #define __LCD1602_H__
 
 #include <REGX52.H>
-#include <INTRINS.H>
 
 sbit _LCD_RW_ = P2^5;		//set read-mode(1) or write-mode(0)
 sbit _LCD_RS_ = P2^6;		//set data-mode(1) or command-mode(0)
 sbit _LCD_EN_ = P2^7;		//set the reading status of LCD registers: LCD get the value(1) or LCD execute the value(0)
+sbit _LCD_BS_ = 0x80^7;		//set the state of LCD
 
-sfr __LCD_Ports__ = 0x80;		//that is equal to P0
+sfr __LCD_Ports__ = 0x80;	//that is equal to P0
 
-void LCD_Delay1ms(void);		//delay 1ms
+void LCD_Write(const unsigned char value, const unsigned char mode);		//read state of LCD
 
-void LCD_WriteCommand(const unsigned char command);		//write command to LCD
+void LCD_Initial(void);		//initial the LCD
 
-void LCD_WriteValue(const unsigned char value);				//write value to LCD
-
-void LCD_Clear(void);				//clear the screen
-
-void LCD_Initial(void);			//initial the LCD
+void LCD_Clear(void);		//clear the screen
 
 void LCD_PrtChar(const char value);		//print a char at the current cursor
 

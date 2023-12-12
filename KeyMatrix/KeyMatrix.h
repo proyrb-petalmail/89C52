@@ -5,6 +5,8 @@
 
 sfr __KM__ = 0x90;		//equal to P1
 
-unsigned char KM_Scan(void);		//scan the key matrix to get the pressed key value
+static unsigned char _Last_Key_ = 0;	//last key
+
+unsigned char KeyMatrix_Scan(void);		//harvest now key(At the moment of falling edge) by scaning key matrix
 
 #endif
