@@ -1,4 +1,4 @@
-# Guide of Libraries for 89C52RC
+# Guide of Libraries for 89C52
 
 ## Brief Introduction
 
