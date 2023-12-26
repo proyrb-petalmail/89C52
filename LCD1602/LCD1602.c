@@ -1,6 +1,6 @@
 #include "LCD1602.h"
 
-//read state of LCD
+//write into LCD
 void LCD_Write(const unsigned char value, const unsigned char mode)
 {
 	static unsigned char busy_state = 0;
@@ -14,11 +14,11 @@ void LCD_Write(const unsigned char value, const unsigned char mode)
 		_LCD_EN_ = 0;
 	} while(busy_state & 0x01 != 0x00);
 	
-	_LCD_RW_ = 0;					//write-mode
-	_LCD_RS_ = mode;				//0(command) 1(data)
+	_LCD_RW_ = 0;				//write-mode
+	_LCD_RS_ = mode;			//0(command) 1(data)
 	__LCD_Ports__ = value;		//commands
-	_LCD_EN_ = 1;					//LCD get the value
-	_LCD_EN_ = 0;					//LCD execute the value
+	_LCD_EN_ = 1;				//LCD get the value
+	_LCD_EN_ = 0;				//LCD execute the value
 }
 
 //initial the LCD

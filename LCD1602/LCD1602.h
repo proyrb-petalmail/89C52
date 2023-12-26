@@ -10,7 +10,7 @@ sbit _LCD_BS_ = 0x80^7;		//set the state of LCD
 
 sfr __LCD_Ports__ = 0x80;	//that is equal to P0
 
-void LCD_Write(const unsigned char value, const unsigned char mode);		//read state of LCD
+void LCD_Write(const unsigned char value, const unsigned char mode);    //write into LCD
 
 void LCD_Initial(void);		//initial the LCD
 

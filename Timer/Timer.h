@@ -12,8 +12,8 @@ void Timer_Start(const unsigned char timer);		//start timer
 
 void Timer_Stop(const unsigned char timer);			//stop timer
 
-void Timer0_Interrupt(void);	//interrupt of timer0
+void Timer0_Interrupt(void);	//interrupt of 1
 
-void Timer1_Interrupt(void);	//interrupt of timer1
+void Timer1_Interrupt(void);	//interrupt of 3
 
 #endif

@@ -1,10 +1,8 @@
 #include "Timer.h"
 
 //initial timer
-void Timer_Initial(const unsigned char timer, const unsigned char high, const unsigned char low)
-{
-	switch(timer)
-	{
+void Timer_Initial(const unsigned char timer, const unsigned char high, const unsigned char low) {
+	switch(timer) {
 		default:
 			break;
 		case 0:
@@ -44,10 +42,8 @@ void Timer_Initial(const unsigned char timer, const unsigned char high, const un
 }
 
 //start timer
-void Timer_Start(const unsigned char timer)
-{
-	switch(timer)
-	{
+void Timer_Start(const unsigned char timer) {
+	switch(timer) {
 		default:
 			break;
 		case 0:
@@ -60,10 +56,8 @@ void Timer_Start(const unsigned char timer)
 }
 
 //stop timer
-void Timer_Stop(const unsigned char timer)
-{
-	switch(timer)
-	{
+void Timer_Stop(const unsigned char timer) {
+	switch(timer) {
 		default:
 			break;
 		case 0:
