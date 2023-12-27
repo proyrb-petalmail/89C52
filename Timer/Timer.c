@@ -68,3 +68,31 @@ void Timer_Stop(const unsigned char timer) {
 			break;
 	}
 }
+
+//callback
+void Timer_Interrput(const unsigned char timer, const void* function) {
+	switch(timer) {
+		default:
+			break;
+		case 0:
+			_timer0_interrupt_ = function;
+			break;
+		case 1:
+			_timer1_interrupt_ = function;
+			break;
+	}
+}
+
+//function of timer0
+void Timer0_Interrupt(void) interrupt 1 {
+	if(_timer0_interrupt_ != 0) {
+		_timer0_interrupt_();
+	}
+}
+
+//function of timer1
+void Timer1_Interrupt(void) interrupt 3 {
+	if(_timer1_interrupt_ != 0) {
+		_timer1_interrupt_();
+	}
+}

@@ -3,7 +3,7 @@
 
 void LEDMatrix_Delay2ms(void)
 {
-	unsigned char data i, j;
+	static unsigned char data i, j;
 
 	_nop_();
 	i = 4;
