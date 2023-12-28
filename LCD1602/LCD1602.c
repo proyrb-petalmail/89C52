@@ -2,15 +2,15 @@
 
 //write into LCD
 void LCD_Write(const unsigned char value, const unsigned char mode) {
-	static unsigned char busy_state = 0;
+	static unsigned char _busy_state_ = 0;
 	
 	_LCD_RW_ = 1;				//read-mode
 	_LCD_RS_ = 0;				//state-mode
 	do {
 		_LCD_EN_ = 1;
-		busy_state = _LCD_BS_;
+		_busy_state_ = _LCD_BS_;
 		_LCD_EN_ = 0;
-	} while(busy_state & 0x01 != 0x00);
+	} while(_busy_state_ & 0x01 != 0x00);
 	
 	_LCD_RW_ = 0;				//write-mode
 	_LCD_RS_ = mode;			//0(command) 1(data)

@@ -22,7 +22,7 @@ void Timer_Initial(const unsigned char timer, const unsigned char high, const un
 			ET0 = 1;	//open thr branch of interrupt
 			break;
 		case 1:
-			//set the initial value for timer0
+			//set the initial value for timer1
 			_Timer1_H_ = high;
 			_Timer1_L_ = low;
 			
@@ -80,19 +80,5 @@ void Timer_Interrput(const unsigned char timer, const void* function) {
 		case 1:
 			_timer1_interrupt_ = function;
 			break;
-	}
-}
-
-//function of timer0
-void Timer0_Interrupt(void) interrupt 1 {
-	if(_timer0_interrupt_ != 0) {
-		_timer0_interrupt_();
-	}
-}
-
-//function of timer1
-void Timer1_Interrupt(void) interrupt 3 {
-	if(_timer1_interrupt_ != 0) {
-		_timer1_interrupt_();
 	}
 }

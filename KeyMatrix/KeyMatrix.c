@@ -2,14 +2,14 @@
 
 //scan key matrix
 unsigned char KeyMatrix_Scan(void) {
-	static unsigned char row = 0, now_key = 0, key = 0;
+	static unsigned char _row_ = 0, now_key = 0, _key_ = 0;
 	
 	_Last_state_ = __KM__;	//save last state
 	
 	//scan every row
-	for(row = 0; row < 4; row++) {
+	for(_row_ = 0; _row_ < 4; _row_++) {
 		__KM__ = 0xFF;				//reset
-		__KM__ = ~(0x80 >> row);	//select the row
+		__KM__ = ~(0x80 >> _row_);	//select the row
 		
 		//get the key value
 		switch((~__KM__) & 0x0F) {
@@ -17,16 +17,16 @@ unsigned char KeyMatrix_Scan(void) {
 				now_key = 0;
 				break;
 			case 0x01:
-				now_key = row * 4 + 4;
+				now_key = _row_ * 4 + 4;
 				break;
 			case 0x02:
-				now_key = row * 4 + 3;
+				now_key = _row_ * 4 + 3;
 				break;
 			case 0x04:
-				now_key = row * 4 + 2;
+				now_key = _row_ * 4 + 2;
 				break;
 			case 0x08:
-				now_key = row * 4 + 1;
+				now_key = _row_ * 4 + 1;
 				break;
 		}
 		
@@ -39,17 +39,17 @@ unsigned char KeyMatrix_Scan(void) {
 	__KM__ = _Last_state_;	//recovery last state
 	
 	if(_Last_Key_ == 0) {
-		key = 0;
+		_key_ = 0;
 	}
 	else {
 		if(now_key == 0) {
-			key = _Last_Key_;
+			_key_ = _Last_Key_;
 		}
 		else {
-			key = 0;
+			_key_ = 0;
 		}
 	}
 	_Last_Key_ = now_key;
 	
-	return key;
+	return _key_;
 }
