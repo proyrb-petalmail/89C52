@@ -1,19 +1,18 @@
 #include "KeyMatrix.h"
 
 //scan key matrix
-unsigned char KeyMatrix_Scan(void)
-{
+unsigned char KeyMatrix_Scan(void) {
 	static unsigned char row = 0, now_key = 0, key = 0;
 	
+	_Last_state_ = __KM__;	//save last state
+	
 	//scan every row
-	for(row = 0; row < 4; row++)
-	{
-		__KM__ = 0xFF;					//reset
+	for(row = 0; row < 4; row++) {
+		__KM__ = 0xFF;				//reset
 		__KM__ = ~(0x80 >> row);	//select the row
 		
 		//get the key value
-		switch((~__KM__) & 0x0F)
-		{
+		switch((~__KM__) & 0x0F) {
 			case 0x00:
 				now_key = 0;
 				break;
@@ -32,24 +31,21 @@ unsigned char KeyMatrix_Scan(void)
 		}
 		
 		//out of the loop if a key is pressed
-		if(now_key != 0)
-		{
+		if(now_key != 0) {
 			break;
 		}
 	}
 	
-	if(_Last_Key_ == 0)
-	{
+	__KM__ = _Last_state_;	//recovery last state
+	
+	if(_Last_Key_ == 0) {
 		key = 0;
 	}
-	else
-	{
-		if(now_key == 0)
-		{
+	else {
+		if(now_key == 0) {
 			key = _Last_Key_;
 		}
-		else
-		{
+		else {
 			key = 0;
 		}
 	}

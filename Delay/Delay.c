@@ -2,63 +2,53 @@
 
 //@11.0592MHz
 
-void Delay2ms(void)
-{
+void Delay2ms(void) {
 	unsigned char data i, j;
 
 	_nop_();
 	i = 4;
 	j = 146;
-	do
-	{
+	do {
 		while (--j);
 	} while (--i);
 }
 
-void Delay5ms(void)
-{
+void Delay5ms(void) {
 	unsigned char data i, j;
 
 	i = 9;
 	j = 244;
-	do
-	{
+	do {
 		while (--j);
 	} while (--i);
 }
 
-void Delay10ms(void)
-{
+void Delay10ms(void) {
 	unsigned char data i, j;
 
 	i = 18;
 	j = 235;
-	do
-	{
+	do {
 		while (--j);
 	} while (--i);
 }
 
-void Delay50ms(void)
-{
+void Delay50ms(void) {
 	unsigned char data i, j;
 
 	i = 90;
 	j = 163;
-	do
-	{
+	do {
 		while (--j);
 	} while (--i);
 }
 
-void Delay100ms(void)
-{
+void Delay100ms(void) {
 	unsigned char data i, j;
 
 	i = 180;
 	j = 73;
-	do
-	{
+	do {
 		while (--j);
 	} while (--i);
 }
