@@ -8,13 +8,13 @@ sbit _DI_ = P3^4;			//set import
 sbit _DA_ = P3^6;			//set add
 sbit _DO_ = P3^5;		    //set output
 
-sfr __Column__ = 0x80;		//set column select
+sfr __column__ = 0x80;		//set column select
 
-static const unsigned char *_values_ = 0;	//values to light
-static unsigned char _length_ = 0;		    //length of values
-static unsigned char _index_ = 0;		    //index of values
+static const unsigned char *item = 0;   //values to light
+static unsigned char length = 0;        //length of values
+static unsigned char start = 0;		    //index of values
 
-void LEDMatrix_Initial(const unsigned char values[], const unsigned char length);	//inital LEDMatrix
+void LEDMatrix_Initial(const unsigned char value[], const unsigned char amount);	//inital LEDMatrix
 
 void LEDMatrix_Light(void);	//light LEDMatrix
 

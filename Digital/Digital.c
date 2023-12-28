@@ -12,8 +12,8 @@ void Digital_Delay2ms(void) {
 }
 
 //initial digital
-void Digital_Initial(const unsigned char values[8]) {
-    _values_ = values;
+void Digital_Initial(const unsigned char value[8]) {
+    item = value;
 }
 
 //light digital
@@ -21,8 +21,8 @@ void Digital_Light(void) {
 	static unsigned char index = 0;
 	
 	for(index = 0; index < 8; index++) {
-		P2 = _unit_[index];
-		P0 = _number_[_values_[index]];
+		__digital__ = cell[index];
+		__data__ = number[item[index]];
 		Digital_Delay2ms();
 	}
 }

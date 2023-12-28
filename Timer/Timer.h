@@ -3,11 +3,11 @@
 
 #include <REGX52.H>
 
-static unsigned char _Timer0_H_ = 0x00, _Timer0_L_ = 0x00;		//initial value of the timer0
-static unsigned char _Timer1_H_ = 0x00, _Timer1_L_ = 0x00;		//initial value of the timer1
+static unsigned char timer0_h = 0x00, timer0_l = 0x00;		//initial value of the timer0
+static unsigned char timer1_h = 0x00, timer1_l = 0x00;		//initial value of the timer1
 
-static void (*_timer0_interrupt_)(void);		//function of timer0
-static void (*_timer1_interrupt_)(void);		//function of timer1
+static void (*timer0_interrupt)(void);		    //function of timer0
+static void (*timer1_interrupt)(void);		    //function of timer1
 
 void Timer_Initial(const unsigned char timer, const unsigned char high, const unsigned char low);   //initial timer
 

@@ -8,7 +8,7 @@ sbit _LCD_RS_ = P2^6;		//set data-mode(1) or command-mode(0)
 sbit _LCD_EN_ = P2^7;		//set the reading status of LCD registers: LCD get the value(1) or LCD execute the value(0)
 sbit _LCD_BS_ = 0x80^7;		//set the state of LCD
 
-sfr __LCD_Ports__ = 0x80;	//that is equal to P0
+sfr __LCD_port__ = 0x80;	//that is equal to P0
 
 void LCD_Write(const unsigned char value, const unsigned char mode);    //write into LCD
 

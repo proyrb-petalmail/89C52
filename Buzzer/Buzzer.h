@@ -4,7 +4,7 @@
 #include <REGX52.H>
 #include <INTRINS.H>
 
-sbit Buzzer = P2^5;
+sbit _buzzer_ = P2^5;
 
 void Beep(void);	//for 20ms
 
