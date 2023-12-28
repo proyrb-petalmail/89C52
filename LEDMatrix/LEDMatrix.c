@@ -24,7 +24,7 @@ void LEDMatrix_Light(void) {
 	static unsigned char column = 0, times = 0;
 	
 	for(column = 0; column < 8; column++) {
-		__Column__ = 0xFF;
+		__Column__ = 0xFF;	//clear last values
 		
 		for(times = 0; times < 8; times++) {
 			if((*(_values_ + ((_index_ + column) % _length_)) & (0x80 >> times)) == (0x80 >> times)) {
@@ -41,7 +41,7 @@ void LEDMatrix_Light(void) {
 		_DO_ = 0;
 		_DO_ = 1;
 		
-		__Column__ = ~(0x80 >> column);
+		__Column__ = ~(0x80 >> column);	//show now values
 		
 		LEDMatrix_Delay2ms();
 	}
