@@ -18,9 +18,11 @@ void Digital_Initial(const unsigned char values[8]) {
 
 //light digital
 void Digital_Light(void) {
+	static unsigned char index = 0;
+	
 	for(index = 0; index < 8; index++) {
 		P2 = _unit_[index];
-		P0 = _values_[index];
+		P0 = _number_[_values_[index]];
 		Digital_Delay2ms();
 	}
 }

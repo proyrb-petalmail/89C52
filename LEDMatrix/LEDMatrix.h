@@ -2,6 +2,7 @@
 #define __LED_MATRIX_H__
 
 #include <REGX52.H>
+#include <INTRINS.H>
 
 sbit _DI_ = P3^4;			//set import
 sbit _DA_ = P3^6;			//set add

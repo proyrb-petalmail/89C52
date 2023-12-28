@@ -2,8 +2,9 @@
 #define __DIGITAL_H__
 
 #include <REGX52.H>
+#include <INTRINS.H>
 
-static unsigned char* _values_ = NULL;
+static unsigned char* _values_ = 0;
 
 //LED8 -> Y7 -> 0001 1100 -> 0x1C
 //LED7 -> Y6 -> 0001 1000 -> 0x18
