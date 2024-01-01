@@ -3,18 +3,15 @@
 
 #include <REGX52.H>
 
-static unsigned char timer0_h = 0x00, timer0_l = 0x00;		//initial value of the timer0
-static unsigned char timer1_h = 0x00, timer1_l = 0x00;		//initial value of the timer1
+//中断间隔 计数器数值
+//0.50ms   65075 = 0xFE33
+//1.00ms   64614 = 0xFC66
+//10.0ms   56320 = 0xDC00
+//50.0ms   19456 = 0x4C00
+void Timer_Initial(const bit timer, const unsigned char high, const unsigned char low); //初始化指定定时器
 
-static void (*timer0_interrupt)(void);		    //function of timer0
-static void (*timer1_interrupt)(void);		    //function of timer1
+void Timer_Control(const bit timer, const bit control); //控制指定定时器开关
 
-void Timer_Initial(const unsigned char timer, const unsigned char high, const unsigned char low);   //initial timer
-
-void Timer_Start(const unsigned char timer);    //start timer
-
-void Timer_Stop(const unsigned char timer);	    //stop timer
-
-void Timer_Interrput(const unsigned char timer, const void* function);		//callback
+void Timer_Callback(const bit timer, const void * const callback); //为指定定时器配置中断时的回调函数
 
 #endif
