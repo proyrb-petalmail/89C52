@@ -1,0 +1,69 @@
+C51 COMPILER V9.60.7.0   TIMER                                                             01/02/2024 09:12:21 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE TIMER
+OBJECT MODULE PLACED IN .\Objects\Timer.obj
+COMPILER INVOKED BY: C:\Program Files\Keil_v5\C51\BIN\C51.EXE Timer\Timer.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND 
+                    -PRINT(.\Listings\Timer.lst) TABS(3) OBJECT(.\Objects\Timer.obj)
+
+line level    source
+
+   1          #include "Timer.h"
+   2          
+   3          static unsigned char timer0_h, timer0_l; //定时器0的计数器的初始值
+   4          static unsigned char timer1_h, timer1_l; //定时器1的计数器的初始值
+   5          
+   6          static void (* timer0_callback)(void); //定时器0中断时的回调函数
+   7          static void (* timer1_callback)(void); //定时器1中断时的回调函数
+   8          
+   9          void Timer_Initial(const bit timer, const unsigned char high, const unsigned char low) {
+  10   1         switch((unsigned char)timer) {
+  11   2            case 0:
+  12   2               TH0 = timer0_h = high;TL0 = timer0_l = low; //记录定时器0计数器的初始值
+  13   2               TMOD = (TMOD & 0xF0) | 0x01; //设置定时器0的工作模式
+  14   2               ET0 = 1; //打开定时器0的中断
+  15   2               break;
+  16   2            case 1:
+  17   2               TH1 = timer1_h = high;TL1 = timer1_l = low; //记录定时器1计数器的初始值
+  18   2               TMOD = (TMOD & 0x0F) | 0x10; //设置定时器1的工作模式
+  19   2               ET1 = 1; //打开定时器1的中断
+  20   2               break;
+  21   2         }
+  22   1         EA = 1; //打开总中断
+  23   1      }
+  24          
+  25          void Timer_Control(const bit timer, const bit control) {
+  26   1         (timer == 0) ? (TR0 = (control == 0 ? 0 : 1)) : (TR1 = (control == 0 ? 0 : 1)); //启动或停止指定
+             -定时器的计数器
+  27   1      }
+  28          
+  29          void Timer_Callback(const bit timer, void * const callback) {
+  30   1         (timer == 0) ? (timer0_callback = callback) : (timer1_callback = callback); //为指定定时器配置�
+             -��断时的回调函数
+  31   1      }
+  32          
+  33          void Timer0_Interrupt(void) interrupt 1 {
+  34   1         TH0 = timer0_h;TL0 = timer0_l; //将定时器0的计数器恢复为初始值
+  35   1         if(timer0_callback) timer0_callback(); //如果定时器0中断时的回调函数存在则执行
+  36   1      }
+  37          
+  38          void Timer1_Interrupt(void) interrupt 3 {
+  39   1         TH1 = timer1_h;TL1 = timer1_l; //将定时器1的计数器恢复为初始值
+  40   1         if(timer1_callback) timer1_callback(); //如果定时器1中断时的回调函数存在则执行
+  41   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    259    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     10       5
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----       4
+END OF MODULE INFORMATION.
+
+C51 COMPILER V9.60.7.0   TIMER                                                             01/02/2024 09:12:21 PAGE 2   
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

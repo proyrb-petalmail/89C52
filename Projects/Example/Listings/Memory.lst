@@ -1,0 +1,42 @@
+C51 COMPILER V9.60.7.0   MEMORY                                                            12/31/2023 09:53:02 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MEMORY
+OBJECT MODULE PLACED IN .\Objects\Memory.obj
+COMPILER INVOKED BY: C:\Program Files\Keil_v5\C51\BIN\C51.EXE Memory\Memory.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEN
+                    -D PRINT(.\Listings\Memory.lst) TABS(3) OBJECT(.\Objects\Memory.obj)
+
+line level    source
+
+   1          #include "Memory.h"
+   2          
+   3          #define RECORD_LENGTH 512 //length of record
+   4          
+   5          //harvest and initial memory
+   6          static char xdata memory[MEMORY_LENGTH];
+   7          
+   8          //harvest and initial record
+   9          static void xdata * xdata record[RECORD_LENGTH];
+  10          
+  11          void* Memory_Allocate(const unsigned char length) {
+  12   1          void xdata * result;
+  13   1      
+  14   1          ;
+  15   1      
+  16   1          return result;
+  17   1      }
+*** WARNING C280 IN LINE 11 OF Memory\Memory.c: 'length': unreferenced local variable
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =      9    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   2048    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       3
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)
