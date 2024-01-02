@@ -1,11 +1,5 @@
 # 为89C52定制的模块库
 
-## 简介
-
-> 首先非常高兴您能对此项目感到有趣，希望可以帮助到你。这篇文章主要针对`STC89C52`及其`外围设备`编写的模块库，但是对`C51`系列的单片机也同样适用。首先我会在`如何使用`这部分告诉你如何引入想要使用的库对应的头文件，其次我会在`库详解`这部分告诉你每个库中列出的函数是如何使用的。
->
-> 最后，如果你在学习和使用过程中，发现任何问题可以通过这个电子邮箱联系我：proyrb@petalmail.com
-
 ## 如何使用
 
 > 在一个项目中如何使用这些模块库？
@@ -16,17 +10,17 @@
 >
 >    ```c
 >    //其他头文件
->                                        
+>                                                       
 >    #include <xxx.h>
->                                        
+>                                                       
 >    //在你想要调用的位置调用库函数
 >    ```
 
 ## 库详解
 
-下列函数的声明和定义分别位于相应库的`.h`和`.c`文件中，想要深入了解模块库实现原理可以打开学习。
+下列函数的声明和定义分别位于相应库的`.h`和`.c`文件中，想要深入了解各模块库如何实现可以打开学习。
 
-- **Delay**
+### Delay
 
   > ```c
   > void Delay2ms(void);
@@ -36,8 +30,8 @@
   > 简介：按照特定时长`延时`。
   > 
   >注意：以上函数只适用于频率为**`11.0592MHz`**的晶振。
-  
-- **Timer**
+
+### Timer
 
   > ```c
   > void Timer_Initial(const bit timer, const unsigned char high, const unsigned char low);
@@ -66,7 +60,7 @@
   > 2. 接着为该定时器设置默认固定的工作模式`1`；
   > 3. 然后打开该定时器对应的分中断；
   > 4. 最后打开总中断；
-  
+
   > ```c
   > void Timer_Control(const bit timer, const bit control);
   > ```
@@ -90,8 +84,8 @@
   > 2. `callback`储存的值是回调函数的地址；
   >
   > 注意：配置的回调函数`callback`必须满足以下两个条件，没有返回值（即返回值类型必须是`void`），且没有参数（即`void`）。
-  
-- **Button**
+
+### Button
 
   > ```c
   > unsigned char Button_Value(void);
@@ -126,7 +120,7 @@
   > ```
 
 
-- **KeyMatrix**
+### KeyMatrix
 
   > ```c
   > unsigned char Keyboard_Value(void);
@@ -161,7 +155,7 @@
   > KEYBOARD_K16 16
   > ```
 
-- **Buzzer**
+### Buzzer
 
   > ```c
   > void Buzzer_Initial(const unsigned char time, const unsigned char period);
@@ -192,7 +186,7 @@
   >
   > 注意：此函数建议在定时器中断的`回调函数`中执行。
 
-- **LEDQueue**
+### LEDQueue
 
   > ```c
   > void LEDQueue_Light(const unsigned char number);
@@ -200,7 +194,7 @@
   >
   > 简介：按照指定方式点亮发光二极管队列。
 
-- **Digital**
+### Digital
 
   > ```c
   > void Digital_Initial(const unsigned char item[], const unsigned char amount);
@@ -239,7 +233,7 @@
   >
   > 注意：可以循环显示。
 
-- **LEDMatrix**
+### LEDMatrix
 
   > ```c
   > void LEDMatrix_Initial(const unsigned char item[], const unsigned char amount);
@@ -278,7 +272,7 @@
   >
   > 注意：可以循环显示。
 
-- **LCD1602**
+### LCD1602
 
   > ```c
   > void LCD_Initial(void);
@@ -293,13 +287,13 @@
   > 3. `数据`读、写操作后，光标自动移动，显示区域不动；
   > 4. 显示开，光标关，闪烁关；
   > 5. 清屏，光标复位；
-  
+
   > ```c
   > void LCD_Clear(void);
   > ```
   >
   > 简介：`清屏`。
-  
+
   > ```C
   > void LCD_PrtChar(const char value);
   > ```
@@ -311,7 +305,7 @@
   > 1. `value`储存的值是要打印的单个字符；
   >
   > 详细：在光标的`当前位置`打印`value`储存的单个字符，`光标自动移动`。
-  
+
   > ```c
   > void LCD_PrtCharAt(const char value, const unsigned char x, const bit y);
   > ```
@@ -324,7 +318,7 @@
   > 2. `x`和`y`储存的值是要打印的坐标位置；
   >
   > 详细：将光标移动到`指定位置`打印`value`储存的`单个字符`，`光标自动移动`。
-  
+
   > ```c
   > void LCD_PrtStr(const char * value);
   > ```
@@ -336,7 +330,7 @@
   > 1. `value`储存的值是一个指向字符串的地址；
   >
   > 详细：在光标`当前位置`打印`value`指定的`字符串`，**字符串必须以`\0`结尾**，`光标自动移动`。
-  
+
   > ```c
   > void LCD_PrtStrAt(const char * value, const unsigned char x, const bit y);
   > ```
@@ -349,8 +343,8 @@
   > 2. `x`和`y`储存的值是开始打印的位置；
   >
   > 详细：将光标移动到`指定位置`打印`value`指定的`字符串`，**字符串必须以`\0`结尾**，`光标自动移动`。
-  
-- **Motor**
+
+### Motor
 
   > ```c
   > void Motor_Initial(const float invert_rate);
@@ -361,7 +355,7 @@
   > 参数：
   >
   > 1. 设置直流电机的驱动时长所占比例，取值为`0.0~1.0`之间，取值越大转速越快；
-  
+
   > ```c
   > void Motor_Emit(const bit value);
   > ```
@@ -371,7 +365,7 @@
   > 参数：
   >
   > 1. `0`和`1`分别表示`驱动`和`不驱动`；
-  
+
   > ```c
   > void Motor_Drive(void);
   > ```
