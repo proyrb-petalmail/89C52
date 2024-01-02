@@ -16,9 +16,9 @@
 >
 >    ```c
 >    //其他头文件
->                         
+>                                        
 >    #include <xxx.h>
->                         
+>                                        
 >    //在你想要调用的位置调用库函数
 >    ```
 
@@ -182,7 +182,7 @@
   >
   > 参数：
   >
-  > 1. `0`和`1`分别表示发声和不发声；
+  > 1. `0`和`1`分别表示`发声`和`不发声`；
 
   > ```c
   > void Buzzer_Beep(void);
@@ -190,51 +190,116 @@
   >
   > 简介：执行`发声`操作。
   >
-  > 注意：此函数建议在定时器中断的回调函数中执行。
+  > 注意：此函数建议在定时器中断的`回调函数`中执行。
 
-- **LCD1602**
+- **LEDQueue**
 
   > ```c
-  > void LCD_Write(const unsigned char value, const unsigned char mode);
+  > void LEDQueue_Light(const unsigned char number);
   > ```
   >
-  > 简介：向LCD液晶写入`指令`或`数据`并`执行`。
+  > 简介：按照指定方式点亮发光二极管队列。
+
+- **Digital**
+
+  > ```c
+  > void Digital_Initial(const unsigned char item[], const unsigned char amount);
+  > ```
+  >
+  > 简介：设置数码管`显示内容`和`其长度`。
   >
   > 参数：
   >
-  > 1. `value`储存的值是想要向LCD液晶写入的值；
+  > 1. `item`储存的值是要显示的内容的数组地址，各元素的值依次表示对应的数码管的显示内容；
+  > 1. `amount`储存的值是`该数组长度`；
   >
-  > 2. `mode`储存的值是表示`value`中的内容是`指令`还是`数据`；
+  > 注意：数码管初始化后默认从`0`作为显示起点。
+
+  > ```c
+  > void Digital_Light(void);
+  > ```
   >
-  >    > | **mode** |      **含义**       |
-  >    > | :------: | :-----------------: |
-  >    > |   `0`    | value中的值是`指令` |
-  >    > |   `1`    | value中的值是`数据` |
+  > 简介：**点亮**数码管。
   >
-  > 详细：
+  > 注意：点亮过程为逐个数码管进行亮点，每个数码管点亮的间隔或者时长为`2ms`。
+
+  > ```c
+  > void Digital_Left(void);
+  > ```
   >
-  > 1. 首先从LCD液晶读取其状态，如果`正忙`则继续读取，直到`不忙`；
-  > 2. 接着向LCD液晶写入内容，并执行该内容；
+  > 简介：`左移`数码管显示内容。
+  >
+  > 注意：可以循环显示。
+
+  > ```C
+  > void Digital_Right(void);
+  > ```
+  >
+  > 简介：`右移`数码管显示内容。
+  >
+  > 注意：可以循环显示。
+
+- **LEDMatrix**
+
+  > ```c
+  > void LEDMatrix_Initial(const unsigned char item[], const unsigned char amount);
+  > ```
+  >
+  > 简介：设置发光二极管矩阵`显示的内容`和`其长度`。
+  >
+  > 参数：
+  >
+  > 1. `item`储存的值是要显示的内容的数组的地址，该数组中的元素的值表示的是一列发光二极管的亮灭组合；
+  > 2. `amount`储存的值是上述数组的长度；
+  >
+  > 注意：初始化后默认从`0`作为显示起点。
+
+  > ```c
+  > void LEDMatrix_Light(void);
+  > ```
+  >
+  > 简介：通过逐列扫描来`点亮`LED矩阵。
+  >
+  > 注意：当前`start`决定了`从何处开始显示`。
+
+  > ```c
+  > void LEDMatrix_Left(void);
+  > ```
+  >
+  > 简介：`左移`显示内容。
+  >
+  > 注意：可以循环显示。
+
+  > ```c
+  > void LEDMatrix_Right(void);
+  > ```
+  >
+  > 简介：`右移`显示内容。
+  >
+  > 注意：可以循环显示。
+
+- **LCD1602**
 
   > ```c
   > void LCD_Initial(void);
   > ```
   >
-  > 简介：``初始化``LCD液晶。
+  > 简介：`初始化`液晶屏。
   >
   > 详细：
   >
-  > 1. 使用八位数据接口，两行显示，5*7点阵；
-  > 2. `数据`读、写操作后，光标自动移动，显示区域不动；
-  > 3. 显示开，光标关，闪烁关；
-  > 4. 清屏，光标复位；
-
+  > 1. 尝试启动；
+  > 2. 使用八位数据接口，两行显示，5*7点阵；
+  > 3. `数据`读、写操作后，光标自动移动，显示区域不动；
+  > 4. 显示开，光标关，闪烁关；
+  > 5. 清屏，光标复位；
+  
   > ```c
   > void LCD_Clear(void);
   > ```
   >
   > 简介：`清屏`。
-
+  
   > ```C
   > void LCD_PrtChar(const char value);
   > ```
@@ -246,9 +311,9 @@
   > 1. `value`储存的值是要打印的单个字符；
   >
   > 详细：在光标的`当前位置`打印`value`储存的单个字符，`光标自动移动`。
-
+  
   > ```c
-  > void LCD_PrtCharAt(const char value, const unsigned char x, const unsigned char y);
+  > void LCD_PrtCharAt(const char value, const unsigned char x, const bit y);
   > ```
   >
   > 简介：在`指定位置`打印单个字符。
@@ -259,9 +324,9 @@
   > 2. `x`和`y`储存的值是要打印的坐标位置；
   >
   > 详细：将光标移动到`指定位置`打印`value`储存的`单个字符`，`光标自动移动`。
-
+  
   > ```c
-  > void LCD_PrtStr(const char *value);
+  > void LCD_PrtStr(const char * value);
   > ```
   >
   > 简介：`打印字符串`。
@@ -271,9 +336,9 @@
   > 1. `value`储存的值是一个指向字符串的地址；
   >
   > 详细：在光标`当前位置`打印`value`指定的`字符串`，**字符串必须以`\0`结尾**，`光标自动移动`。
-
+  
   > ```c
-  > void LCD_PrtStrAt(const char *value, const unsigned char x, const unsigned char y);
+  > void LCD_PrtStrAt(const char * value, const unsigned char x, const bit y);
   > ```
   >
   > 简介：在`指定位置`打印字符串。
@@ -283,60 +348,34 @@
   > 1. `value`储存的值是一个指向字符串的地址；
   > 2. `x`和`y`储存的值是开始打印的位置；
   >
-  > 详细：将光标移动到`指定位置`打印`value`指定的`字符串`，`光标自动移动`。
-
-- **LEDMatrix**
+  > 详细：将光标移动到`指定位置`打印`value`指定的`字符串`，**字符串必须以`\0`结尾**，`光标自动移动`。
+  
+- **Motor**
 
   > ```c
-  > void LEDMatrix_Initial(const unsigned char values[], const unsigned char length);
+  > void Motor_Initial(const float invert_rate);
   > ```
   >
-  > 简介：`初始化`LED矩阵。
+  > 简介：`初始化`直流电机。
   >
   > 参数：
   >
-  > 1. `values`储存的值是一维数组的地址，该数组中的元素的值表示的是一列LED的亮灭组合；
-  > 2. `length`储存的值是上述数组的长度；
-  >
-  > 详细：
-  >
-  > 1. 首先将`values`和`length`分别赋值给全局变量进行储存；
-  > 2. 最后设置开始显示的数组下标`index`为`0`；
-
+  > 1. 设置直流电机的驱动时长所占比例，取值为`0.0~1.0`之间，取值越大转速越快；
+  
   > ```c
-  > void LEDMatrix_Light(void);
+  > void Motor_Emit(const bit value);
   > ```
   >
-  > 简介：通过逐列扫描来`点亮`LED矩阵。
-  >
-  > 注意：LED矩阵每列的亮灭组合由`values`和当前显示的下标`index`共同决定；如果显示下标超过数组长度则会继续从头显示。
-
-  > ```c
-  > void LEDMatrix_Next(void);
-  > ```
-  >
-  > 简介：`移动显示下标`。
-  >
-  > 注意：如果超出数组长度则会自动回到`0`。
-
-- **Digital**
-
-  > ```c
-  > void Digital_Initial(const unsigned char values[8]);
-  > ```
-  >
-  > 简介：`初始化`数码管模块。
+  > 简介：发出信号。
   >
   > 参数：
   >
-  > 1. `values`储存的值是一组长度为`8`的数组首地址，各元素的值依次表示对应的数码管的显示内容；
-  >
-  > 注意：`values`的长度固定为`8`。
-
+  > 1. `0`和`1`分别表示`驱动`和`不驱动`；
+  
   > ```c
-  > void Digital_Light(void);
+  > void Motor_Drive(void);
   > ```
   >
-  > 简介：**点亮**数码管。
+  > 简介：`驱动`直流电机。
   >
-  > 注意：点亮过程为逐个数码管进行亮点，每个数码管点亮的间隔或者时长为`2ms`。
+  > 注意：此函数建议在定时器中断时的`回调函数`中执行。

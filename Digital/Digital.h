@@ -5,7 +5,7 @@
 
 #include "Delay/Delay.h"
 
-void Digital_Initial(const unsigned char item[], const unsigned char amount); //设置数码管要显示的内容和内容长度
+void Digital_Initial(const unsigned char item[], const unsigned char amount); //设置数码管要显示的内容和1其长度
 
 void Digital_Light(void); //点亮数码管
 
