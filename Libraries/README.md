@@ -10,9 +10,9 @@
 >
 >    ```c
 >    //其他头文件
->                                                       
+>                                                             
 >    #include <xxx.h>
->                                                       
+>                                                             
 >    //在你想要调用的位置调用库函数
 >    ```
 
@@ -100,24 +100,24 @@
   >
   > 注意：按钮返回的键值是可以包含多按钮键值，以下是键值表：
   >
-  > ```c
-  > BUTTON_NONE 0x0F //定义无按钮组合
-  > BUTTON_B1 0x0D
-  > BUTTON_B2 0x0E
-  > BUTTON_B3 0x0B
-  > BUTTON_B4 0x07
-  > BUTTON_B1_B2 0x0C
-  > BUTTON_B1_B3 0x09
-  > BUTTON_B1_B4 0x05
-  > BUTTON_B2_B3 0x0A
-  > BUTTON_B2_B4 0x06
-  > BUTTON_B3_B4 0x03
-  > BUTTON_B1_B2_B3 0x08
-  > BUTTON_B1_B2_B4 0x04
-  > BUTTON_B1_B3_B4 0x01
-  > BUTTON_B2_B3_B4 0x02
-  > BUTTON_B1_B2_B3_B4 0x00
-  > ```
+  > | 宏标识             | 键值   |
+  > | ------------------ | ------ |
+  > | BUTTON_NONE        | `0x0F` |
+  > | BUTTON_B1          | `0x0D` |
+  > | BUTTON_B2          | `0x0E` |
+  > | BUTTON_B3          | `0x0B` |
+  > | BUTTON_B4          | `0x07` |
+  > | BUTTON_B1_B2       | `0x0C` |
+  > | BUTTON_B1_B3       | `0x09` |
+  > | BUTTON_B1_B4       | `0x05` |
+  > | BUTTON_B2_B3       | `0x0A` |
+  > | BUTTON_B2_B4       | `0x06` |
+  > | BUTTON_B3_B4       | `0x03` |
+  > | BUTTON_B1_B2_B3    | `0x08` |
+  > | BUTTON_B1_B2_B4    | `0x04` |
+  > | BUTTON_B1_B3_B4    | `0x01` |
+  > | BUTTON_B2_B3_B4    | `0x02` |
+  > | BUTTON_B1_B2_B3_B4 | `0x00` |
 
 
 ### KeyMatrix
@@ -135,25 +135,25 @@
   >
   > 注意：扫描按键矩阵过程中，`只对一个按键的抬起返回有效键值`，即`长按和同时按都不会返回对应键值`，以下是键值表：
   >
-  > ```c
-  > KEYBOARD_NONE 0 //定义无按钮组合
-  > KEYBOARD_K1 1
-  > KEYBOARD_K2 2
-  > KEYBOARD_K3 3
-  > KEYBOARD_K4 4
-  > KEYBOARD_K5 5
-  > KEYBOARD_K6 6
-  > KEYBOARD_K7 7
-  > KEYBOARD_K8 8
-  > KEYBOARD_K9 9
-  > KEYBOARD_K10 10
-  > KEYBOARD_K11 11
-  > KEYBOARD_K12 12
-  > KEYBOARD_K13 13
-  > KEYBOARD_K14 14
-  > KEYBOARD_K15 15
-  > KEYBOARD_K16 16
-  > ```
+  > | 宏标识             | 键值   |
+  > | ------------------ | ------ |
+  > |KEYBOARD_NONE |`0`|
+  > |KEYBOARD_K1 |`1`|
+  > |KEYBOARD_K2 |`2`|
+  > |KEYBOARD_K3 |`3`|
+  > |KEYBOARD_K4 |`4`|
+  > |KEYBOARD_K5 |`5`|
+  > |KEYBOARD_K6 |`6`|
+  > |KEYBOARD_K7 |`7`|
+  > |KEYBOARD_K8| `8` |
+  > |KEYBOARD_K9| `9` |
+  > |KEYBOARD_K10 |`10`|
+  > |KEYBOARD_K11 |`11`|
+  > |KEYBOARD_K12 |`12`|
+  > |KEYBOARD_K13 |`13`|
+  > |KEYBOARD_K14 |`14`|
+  > |KEYBOARD_K15 |`15`|
+  > |KEYBOARD_K16 |`16`|
 
 ### Buzzer
 
