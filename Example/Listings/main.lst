@@ -1,0 +1,151 @@
+C51 COMPILER V9.60.7.0   MAIN                                                              01/02/2024 09:12:21 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: C:\Program Files\Keil_v5\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.
+                    -\Listings\main.lst) TABS(3) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #define MEMORY_SIZE (1024 * 32) //定义堆内存的大小
+   2          
+   3          #define DIGITAL_VALUE_LENGTH 16 //定义数码管显示内容的长度
+   4          #define LEDMATRIX_VALUE_LENGTH 16 //定义发光二极管矩阵显示内容的长度
+   5          
+   6          #include <stdlib.h>
+   7          #include "Timer/Timer.h"
+   8          #include "Button/Button.h"
+   9          #include "Keyboard/Keyboard.h"
+  10          #include "Buzzer/Buzzer.h"
+  11          #include "LEDQueue/LEDQueue.h"
+  12          #include "Digital/Digital.h"
+  13          #include "LEDMatrix/LEDMatrix.h"
+  14          #include "LCD1602/LCD1602.h"
+  15          #include "Motor/Motor.h"
+  16          
+  17          static char xdata memory[MEMORY_SIZE]; //申请内存池
+  18          
+  19          static bit signal_scan_button; //是否扫描按钮
+  20          static bit signal_scan_keyboard; //是否扫描键盘
+  21          
+  22          void timer0_callback(void); //定时器0的回调函数
+  23          
+  24          void main(void) {
+  25   1         unsigned char button_value = BUTTON_NONE; //按钮的键值
+  26   1         unsigned char keyboard_value = KEYBOARD_NONE; //键盘的键值
+  27   1         //unsigned char code digital_value[DIGITAL_VALUE_LENGTH] = {1,2,3,4,5,6,7,8,8,7,6,5,4,3,2,1}; //数码�
+             -��显示内容
+  28   1         //unsigned char code ledmatrix_value[LEDMATRIX_VALUE_LENGTH] = {0x00,0x00,0x12,0x22,0x7E,0x02,0x00,0x00
+             -,0x00,0x22,0x42,0x46,0x4A,0x52,0x22,0x00}; //发光二极管矩阵显示内容
+  29   1         
+  30   1         init_mempool(memory, MEMORY_SIZE); //初始化内存池
+  31   1         
+  32   1         Buzzer_Initial(50, 1); //设置蜂鸣器发声时长和频率
+  33   1         Motor_Initial(1.0); //设置直流电机驱动比
+  34   1         //Digital_Initial(digital_value, DIGITAL_VALUE_LENGTH); //设置数码管显示内容和其长度
+  35   1         //LEDMatrix_Initial(ledmatrix_value, LEDMATRIX_VALUE_LENGTH); //设置发光二极管矩阵显示内容
+             -和其长度
+  36   1         //LCD_Initial(); //初始化液晶屏
+  37   1         
+  38   1         Timer_Initial(0, 0xFC, 0x66); //将定时器0的中断间隔设置为1ms
+  39   1         Timer_Callback(0, timer0_callback); //配置定时器0中断时的回调函数
+  40   1         Timer_Control(0, 1); //启动定时器0
+  41   1         
+  42   1         while(1) {
+  43   2            if(signal_scan_button == 1) {
+  44   3               signal_scan_button = 0; //重置信号
+  45   3               if((button_value = Button_Value()) != BUTTON_NONE) {Buzzer_Emit(1);} //获取按钮的键值并�
+             -�声
+  46   3               switch(button_value) {
+  47   4                  case BUTTON_B1:
+  48   4                     Motor_Emit(1);
+  49   4                     break;
+  50   4                  case BUTTON_B2:
+C51 COMPILER V9.60.7.0   MAIN                                                              01/02/2024 09:12:21 PAGE 2   
+
+  51   4                     Motor_Emit(0);
+  52   4                     break;
+  53   4                  case BUTTON_B3:
+  54   4                     Motor_Initial(0.1);
+  55   4                     break;
+  56   4                  case BUTTON_B4:
+  57   4                     Motor_Initial(1.0);
+  58   4                     break;
+  59   4                  default:
+  60   4                     break;
+  61   4               }
+  62   3            }
+  63   2            if(signal_scan_keyboard == 1) {
+  64   3               signal_scan_keyboard = 0; //重置信号
+  65   3               if((keyboard_value = Keyboard_Value()) != KEYBOARD_NONE) {Buzzer_Emit(1);} //获取键盘的键�
+             -�并发声
+  66   3               switch(keyboard_value) {
+  67   4                  case KEYBOARD_K1:
+  68   4                     break;
+  69   4                  case KEYBOARD_K2:
+  70   4                     break;
+  71   4                  case KEYBOARD_K3:
+  72   4                     break;
+  73   4                  case KEYBOARD_K4:
+  74   4                     break;
+  75   4                  case KEYBOARD_K5:
+  76   4                     break;
+  77   4                  case KEYBOARD_K6:
+  78   4                     break;
+  79   4                  case KEYBOARD_K7:
+  80   4                     break;
+  81   4                  case KEYBOARD_K8:
+  82   4                     break;
+  83   4                  case KEYBOARD_K9:
+  84   4                     break;
+  85   4                  case KEYBOARD_K10:
+  86   4                     break;
+  87   4                  case KEYBOARD_K11:
+  88   4                     break;
+  89   4                  case KEYBOARD_K12:
+  90   4                     break;
+  91   4                  case KEYBOARD_K13:
+  92   4                     break;
+  93   4                  case KEYBOARD_K14:
+  94   4                     break;
+  95   4                  case KEYBOARD_K15:
+  96   4                     break;
+  97   4                  case KEYBOARD_K16:
+  98   4                     break;
+  99   4                  default:
+ 100   4                     break;
+ 101   4               }
+ 102   3            }
+ 103   2            //Digital_Light();
+ 104   2            //LEDMatrix_Light();
+ 105   2         }
+ 106   1      }
+ 107          
+ 108          void timer0_callback(void) {
+ 109   1         static unsigned char count; //记录回调函数执行次数
+ 110   1         
+ 111   1         if(count % 100 == 0) {
+C51 COMPILER V9.60.7.0   MAIN                                                              01/02/2024 09:12:21 PAGE 3   
+
+ 112   2            signal_scan_keyboard = signal_scan_button = 1;//发出扫描按钮和键盘的信号
+ 113   2         }
+ 114   1         Buzzer_Beep(); //发声
+ 115   1         Motor_Drive(); //驱动
+ 116   1      
+ 117   1         count = ++count % 200; //计一次数
+ 118   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    187    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =  32768    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      1       2
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      2    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
